@@ -8,16 +8,27 @@ document.addEventListener('DOMContentLoaded', function() {
   // DOM Elements
   const startScreen = document.getElementById('start-screen');
   const gameScreen = document.getElementById('game-screen');
-  const resultScreen = document.getElementById('result-screen');
+  const resultScreen = document.getElementById('result-screen') || document.createElement('div'); // Fallback if element doesn't exist
   const finalReportScreen = document.getElementById('final-report-screen');
   const loadingScreen = document.getElementById('loading-screen');
+  
+  // Check all required elements before using them
+  if (!startScreen || !gameScreen || !finalReportScreen || !loadingScreen) {
+    console.error('Required DOM elements not found. Check HTML structure and IDs.');
+    return; // Exit function to prevent further errors
+  }
 
   const startButton = document.getElementById('start-button');
-  const continueButton = document.getElementById('continue-button');
+  const continueButton = document.getElementById('continue-button') || document.createElement('button'); // Fallback
   const restartButton = document.getElementById('restart-button');
   const copyIdButton = document.getElementById('copy-id-button');
   const collectionButton = document.getElementById('collection-button');
   const closeCollectionButton = document.getElementById('close-collection');
+  
+  if (!startButton || !restartButton || !copyIdButton || !collectionButton || !closeCollectionButton) {
+    console.error('Required button elements not found. Check HTML structure and IDs.');
+    return;
+  }
 
   const progressBar = document.getElementById('progress');
   const currentLevelSpan = document.getElementById('current-level');
@@ -117,14 +128,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     e.target.classList.add('selected');
 
-    // Show result after a short delay
-    setTimeout(() => {
-      resultIcon.textContent = result.icon;
-      resultTitle.textContent = '你获得了：';
-      resultDescription.textContent = result.description;
+    // Show popup result and automatically go to next level after delay
+    showResultPopup(result.icon, result.description);
+  }
 
-      switchScreen(gameScreen, resultScreen);
-    }, 500);
+  // Show result popup
+  function showResultPopup(icon, description) {
+    // Create popup element
+    const popup = document.createElement('div');
+    popup.className = 'result-popup';
+    
+    const popupContent = document.createElement('div');
+    popupContent.className = 'result-popup-content';
+    
+    const popupIcon = document.createElement('div');
+    popupIcon.className = 'result-popup-icon';
+    popupIcon.textContent = icon;
+    
+    const popupTitle = document.createElement('h3');
+    popupTitle.textContent = '你获得了：';
+    
+    const popupDesc = document.createElement('p');
+    popupDesc.textContent = description;
+    
+    popupContent.appendChild(popupIcon);
+    popupContent.appendChild(popupTitle);
+    popupContent.appendChild(popupDesc);
+    popup.appendChild(popupContent);
+    
+    document.body.appendChild(popup);
+    
+    // Show popup with animation
+    setTimeout(() => {
+      popup.classList.add('show');
+    }, 10);
+    
+    // Automatically go to next level after 1 second
+    setTimeout(() => {
+      popup.classList.remove('show');
+      setTimeout(() => {
+        popup.remove();
+        goToNextLevel();
+      }, 300);
+    }, 1000);
   }
 
   // Go to the next level or end the game
@@ -132,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
     currentLevel++;
 
     if (currentLevel <= gameData.levels.length) {
-      switchScreen(resultScreen, gameScreen);
       loadLevel(currentLevel);
     } else {
       // Game completed, show final report
