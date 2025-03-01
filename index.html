@@ -1,132 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="keywords" content="mobile, simulator, mobile design, mobile app">
-  <meta name="author" content="Your Name or Company">
-  <meta http-equiv="Content-Language" content="en">
-
-  <!-- Canonical Link -->
-  <link rel="canonical" href="https://www.yourwebsite.com/pc-simulator" />
-
-  <!-- Open Graph for Social Media -->
-  <meta property="og:title" content="PC Simulator">
-  <meta property="og:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta property="og:image" content="https://www.yourwebsite.com/pc-simulator-image.jpg">
-  <meta property="og:url" content="https://www.yourwebsite.com/pc-simulator">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PC Simulator">
-  <meta name="twitter:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="twitter:image" content="https://www.yourwebsite.com/pc-simulator-image.jpg">
-  <meta name="twitter:creator" content="@yourtwitterhandle">
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://www.yourwebsite.com/favicon.ico" type="image/x-icon">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-XXXXX-Y');
-  </script>
-
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y) {
-      window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments)};
-      clarity('set', 'anonymizeIP', true);
-      i=l.createElement('script');i.async=1;i.src=r;i.type='text/javascript';
-      t=l.getElementsByTagName('script')[0];t.parentNode.insertBefore(i,t);
-    })(document,window,'script','https://www.clarity.ms/tag/XXXXXX');
-  </script>
-
-  <title>PC Simulator</title>
-
-  <style>
-    /* Global Styles */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    .mobile-container {
-      width: 360px;
-      height: 640px;
-      border: 16px solid black;
-      border-radius: 16px;
-      background-color: #fff;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .content {
-      font-size: 1.2rem;
-      color: #333;
-    }
-
-    /* Adjustments for PC */
-    @media (min-width: 768px) {
-      .mobile-container {
-        width: 600px;
-        height: 1000px;
-      }
-
-      .content {
-        font-size: 1.5rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .mobile-container {
-        width: 800px;
-        height: 1400px;
-      }
-
-      .content {
-        font-size: 1.8rem;
-      }
-    }
-
-    /* Additional responsiveness for larger screens */
-    @media (min-width: 1200px) {
-      body {
-        justify-content: flex-start;
-      }
-
-      .mobile-container {
-        margin-top: 50px;
-      }
-    }
-  </style>
+  <title>测测你与中医的缘分</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <div class="mobile-container">
-    <div class="content">
-      <p>Mobile Simulator Screen</p>
-      <p>PC Version: Adjusted for larger screens.</p>
+  <div id="app">
+    <div id="start-screen" class="screen active">
+      <div class="title-container">
+        <h1>测测你与中医的缘分</h1>
+        <h2>领取传承者身份</h2>
+      </div>
+      <div class="story-container">
+        <h3>背景设定：</h3>
+        <p>在一个未来与古老结合的世界里，科技与中医相互交融，创造出了一个名为"智慧养生之门"的地方。传说中，只有那些能够理解中医、掌握智能科技的人，才能解开这扇神秘的大门，探索未来的健康与治疗方法。你作为一名探索者，踏上了这条充满挑战和谜题的道路，旨在找到解锁"智慧养生之门"的方法。</p>
+      </div>
+      <button id="start-button" class="main-button">开始探索</button>
+    </div>
+
+    <div id="game-screen" class="screen">
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div id="progress" class="progress"></div>
+        </div>
+        <div class="progress-text">关卡 <span id="current-level">1</span>/15</div>
+      </div>
+      
+      <div class="story-box">
+        <h3 id="level-title">第一关：中医与现代化的选择</h3>
+        <p id="level-story">你进入一座古老的书房，看到一本名为《中医的未来》的书。书中提到："如何将传统中医与现代科技相结合。"在书旁，一道传送门等待着你的选择。</p>
+      </div>
+      
+      <div class="question-box">
+        <p id="question">你如何看待中医的现代化与智能化发展？</p>
+        <div id="options" class="options">
+          <button class="option" data-value="A">A. 非常支持，我认为中医需要借助现代科技来创新</button>
+          <button class="option" data-value="B">B. 愿意尝试，但并不确定中医的未来发展</button>
+          <button class="option" data-value="C">C. 不支持，我认为中医应该保持传统</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="result-screen" class="screen">
+      <div class="result-box">
+        <div id="result-icon">🎉</div>
+        <h2 id="result-title">你获得了：</h2>
+        <p id="result-description">现代智慧草药的启示</p>
+      </div>
+      <button id="continue-button" class="main-button">继续探索</button>
+    </div>
+
+    <div id="final-report-screen" class="screen">
+      <div class="report-container">
+        <h2>探索报告</h2>
+        <div class="score-box">
+          <div class="score-title">最终得分</div>
+          <div id="final-score" class="score-value">0</div>
+        </div>
+        
+        <div class="analysis-container">
+          <h3>详细分析</h3>
+          <div id="analysis-content" class="analysis-content">
+            <!-- 分析内容会动态添加 -->
+          </div>
+          
+          <div id="identity-card" class="identity-card hidden">
+            <div class="card-header">
+              <h3>恭喜你获得传承者身份</h3>
+            </div>
+            <div class="card-body">
+              <div class="identity-info">
+                <span class="label">身份ID:</span>
+                <span id="identity-id">--</span>
+              </div>
+              <div class="card-notice">请注意保存您的身份ID</div>
+              <button id="copy-id-button" class="copy-button">复制ID</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rewards-container">
+          <h3>获得的奖励</h3>
+          <div id="rewards-list" class="rewards-list">
+            <!-- 奖励内容会动态添加 -->
+          </div>
+        </div>
+        
+        <button id="restart-button" class="main-button">重新探索</button>
+      </div>
+    </div>
+
+    <button id="collection-button" class="collection-button">🧩</button>
+    
+    <div id="toast-container" class="toast-container"></div>
+    
+    <div id="collection-modal" class="collection-modal">
+      <div class="collection-content">
+        <div class="collection-header">
+          <h3 class="collection-title">已收集物品</h3>
+          <button id="close-collection" class="close-collection">×</button>
+        </div>
+        <div id="collection-items" class="collection-items">
+          <!-- Collection items will be added here -->
+        </div>
+      </div>
+    </div>
+    
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">正在加载...</div>
     </div>
   </div>
-</body>
 
+  <script src="game-data.js"></script>
+  <script src="app.js"></script>
+</body>
 </html>
